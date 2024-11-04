@@ -49,7 +49,8 @@
 
             function draw() {
                 if (img) {
-                    background(img);
+                    background(200);
+                    image(img, 0, 0, width, height);
                 } else {
                     background(200);
                     fill(255, 0, 0);
@@ -57,10 +58,6 @@
                     textAlign(CENTER, CENTER);
                     text('Image not loaded', width / 2, height / 2);
                 }
-                fill(255, 0, 0);
-                ellipse(mouseX, mouseY, 50, 50);
-                displayCoordinates();
-                checkMouseOverZones();
                 displayScore();
                 displayInteractiveHints();
                 if (showJerryOptions) {
@@ -77,43 +74,11 @@
                 }
             }
 
-            function displayCoordinates() {
-                fill(0);
-                textSize(16);
-                text('X: ' + mouseX + ' Y: ' + mouseY, 10, 20);
-            }
-
             function displayScore() {
                 fill(255);
                 textSize(24);
                 textAlign(LEFT, TOP);
                 text('Score: ' + score, 133, 199);
-            }
-
-            function checkMouseOverZones() {
-                // Define interactive zones with labels
-                let label = '';
-                if ((mouseX > 160 && mouseX < 200) && (mouseY > 470 && mouseY < 510)) {
-                    label = 'Jerry';
-                    cursor('pointer');
-                } else if ((mouseX > 460 && mouseX < 500) && (mouseY > 490 && mouseY < 530)) {
-                    label = 'Terry';
-                    cursor('pointer');
-                } else if ((mouseX > 780 && mouseX < 820) && (mouseY > 555 && mouseY < 595)) {
-                    label = 'Cherry';
-                    cursor('pointer');
-                } else if ((mouseX > 813 && mouseX < 853) && (mouseY > 175 && mouseY < 215)) {
-                    label = 'Planet Zeebo';
-                    cursor('pointer');
-                } else {
-                    cursor('default');
-                }
-                
-                if (label !== '') {
-                    fill(255, 0, 0);
-                    textSize(16);
-                    text(label, mouseX + 15, mouseY - 15);
-                }
             }
 
             function displayInteractiveHints() {
@@ -187,6 +152,7 @@
                     score -= 500;
                     showJerryOptions = false;
                 }
+                redraw();
             }
 
             function handleTerryOptions() {
@@ -199,6 +165,7 @@
                     score += 500;
                     showTerryOptions = false;
                 }
+                redraw();
             }
 
             function handleCherryOptions() {
@@ -211,6 +178,7 @@
                     score += 500;
                     showCherryOptions = false;
                 }
+                redraw();
             }
 
             function handleZeeboOptions() {
@@ -233,6 +201,44 @@
                 text('Feed Jerry', width / 2, 550);
                 fill(0, 255, 0);
                 textSize(24);
-                text('Give Jerry lasagna', width / 2)
+                text('Give Jerry lasagna', width / 2, 630);
+                text('Give Jerry Worms', width / 2, 680);
             }
+
+            function displayTerryOptions() {
+                fill(255, 0, 0);
+                textSize(32);
+                textAlign(CENTER);
+                text('Might I have a bit of food please?', width / 2, 550);
+                fill(0, 255, 0);
+                textSize(24);
+                text('Give Terry butter', width / 2, 630);
+                text('Give Terry blueberries', width / 2, 680);
+            }
+
+            function displayCherryOptions() {
+                fill(255, 0, 0);
+                textSize(32);
+                textAlign(CENTER);
+                text("I'm hungry!", width / 2, 550);
+                fill(0, 255, 0);
+                textSize(24);
+                text('Give Cherry cheese', width / 2, 630);
+                text('Give Cherry cherries', width / 2, 680);
+            }
+
+            function displayZeeboOptions() {
+                fill(255, 0, 0);
+                textSize(32);
+                textAlign(CENTER);
+                text('The Planet Zeebo does not need sustenance', width / 2, 550);
+                fill(0, 255, 0);
+                textSize(24);
+                text('Give Planet Zeebo nothing', width / 2, 630);
+                text('Give Planet Zeebo a slice of pie anyway', width / 2, 680);
+            }
+        </script>
+    </div>
+</body>
+</html>
 
