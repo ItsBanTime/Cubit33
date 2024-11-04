@@ -45,14 +45,13 @@
             function setup() {
                 let canvas = createCanvas(1000, 1000);
                 canvas.parent('game-container');
-                noLoop();  // Prevent automatic looping, redraw manually
             }
 
             function draw() {
-                background(200);
                 if (img) {
-                    image(img, 0, 0, width, height);
+                    background(img);
                 } else {
+                    background(200);
                     fill(255, 0, 0);
                     textSize(32);
                     textAlign(CENTER, CENTER);
@@ -225,5 +224,15 @@
                     showZeeboOptions = false;
                 }
                 redraw();
+            }
+
+            function displayJerryOptions() {
+                fill(255, 0, 0);
+                textSize(32);
+                textAlign(CENTER);
+                text('Feed Jerry', width / 2, 550);
+                fill(0, 255, 0);
+                textSize(24);
+                text('Give Jerry lasagna', width / 2)
             }
 
