@@ -217,15 +217,13 @@
             function handleZeeboOptions() {
                 if ((mouseX > 400 && mouseX < 600) && (mouseY > 600 && mouseY < 640)) {
                     console.log('Give Planet Zeebo nothing');
+                    score += 0;
                     showZeeboOptions = false;
                 } else if ((mouseX > 400 && mouseX < 600) && (mouseY > 650 && mouseY < 690)) {
                     console.log('Give Planet Zeebo a slice of pie anyway');
                     score += 1500;
                     showZeeboOptions = false;
                 }
+                redraw();
             }
 
-            function displayJerryOptions() {
-                fill(255, 0, 0);
-                textSize(32);
-                textAlign(C
