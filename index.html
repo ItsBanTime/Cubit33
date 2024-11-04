@@ -45,14 +45,14 @@
             function setup() {
                 let canvas = createCanvas(1000, 1000);
                 canvas.parent('game-container');
+                imageMode(CENTER);
             }
 
             function draw() {
+                background(200);
                 if (img) {
-                    background(200);
-                    image(img, 0, 0, width, height);
+                    image(img, width / 2, height / 2, 1000, 1000);
                 } else {
-                    background(200);
                     fill(255, 0, 0);
                     textSize(32);
                     textAlign(CENTER, CENTER);
@@ -221,24 +221,5 @@
                 textSize(32);
                 textAlign(CENTER);
                 text("I'm hungry!", width / 2, 550);
-                fill(0, 255, 0);
-                textSize(24);
-                text('Give Cherry cheese', width / 2, 630);
-                text('Give Cherry cherries', width / 2, 680);
+                fill
             }
-
-            function displayZeeboOptions() {
-                fill(255, 0, 0);
-                textSize(32);
-                textAlign(CENTER);
-                text('The Planet Zeebo does not need sustenance', width / 2, 550);
-                fill(0, 255, 0);
-                textSize(24);
-                text('Give Planet Zeebo nothing', width / 2, 630);
-                text('Give Planet Zeebo a slice of pie anyway', width / 2, 680);
-            }
-        </script>
-    </div>
-</body>
-</html>
-
