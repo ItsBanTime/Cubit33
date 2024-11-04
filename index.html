@@ -31,7 +31,15 @@
             let showZeeboOptions = false;
 
             function preload() {
-                img = loadImage('Cubit33.jpg');
+                img = loadImage('Cubit33.jpg', imgLoaded, imgFailed);
+            }
+
+            function imgLoaded() {
+                console.log('Image loaded successfully');
+            }
+
+            function imgFailed() {
+                console.error('Failed to load the image. Please make sure the image path is correct.');
             }
 
             function setup() {
@@ -42,7 +50,14 @@
 
             function draw() {
                 background(200);
-                image(img, 0, 0, width, height);
+                if (img) {
+                    image(img, 0, 0, width, height);
+                } else {
+                    fill(255, 0, 0);
+                    textSize(32);
+                    textAlign(CENTER, CENTER);
+                    text('Image not loaded', width / 2, height / 2);
+                }
                 fill(255, 0, 0);
                 ellipse(mouseX, mouseY, 50, 50);
                 displayCoordinates();
@@ -210,3 +225,7 @@
                 }
             }
 
+            function displayJerryOptions() {
+                fill(255, 0, 0);
+                textSize(32);
+                textAlign(C
