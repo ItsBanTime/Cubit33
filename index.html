@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p5.js Game</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        #game-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <script>
+            let img;
+            let score = 0;
+            let showJerryOptions = false;
+            let showTerryOptions = false;
+            let showCherryOptions = false;
+            let showZeeboOptions = false;
+
+            function preload() {
+                img = loadImage('Cubit33.jpg');
+            }
+
+            function setup() {
+                let canvas = createCanvas(1000, 1000);
+                canvas.parent('game-container');
+                noLoop();  // Prevent automatic looping, redraw manually
+            }
+
+            function draw() {
+                background(200);
+                image(img, 0, 0, width, height);
+                fill(255, 0, 0);
+                ellipse(mouseX, mouseY, 50, 50);
+                displayCoordinates();
+                checkMouseOverZones();
+                displayScore();
+                if (showJerryOptions) {
+                    displayJerryOptions();
+                }
+                if (showTerryOptions) {
+                    displayTerryOptions();
+                }
+                if (showCherryOptions) {
+                    displayCherryOptions();
+                }
+                if (showZeeboOptions) {
+                    displayZeeboOptions();
+                }
+            }
+
+            function displayCoordinates() {
+                fill(0);
+                textSize(16);
+                text('X: ' + mouseX + ' Y: ' + mouseY, 10, 20);
+            }
+
+            function displayScore() {
+                fill(255);
+                textSize(24);
+                textAlign(RIGHT, TOP);
+                text('Score: ' + score, width - 10, 10);
+            }
+
+            function checkMouseOverZones() {
+                // Define interactive zones with labels
+                let label = '';
+                if ((mouseX > 160 && mouseX < 200) && (mouseY > 530 && mouseY < 570)) {
+                    label = 'Jerry';
+                    cursor('pointer');
+                } else if ((mouseX > 546 && mouseX < 586) && (mouseY > 579 && mouseY < 619)) {
+                    label = 'Terry';
+                    cursor('pointer');
+                } else if ((mouseX > 939 && mouseX < 979) && (mouseY > 660 && mouseY < 700)) {
+                    label = 'Cherry';
+                    cursor('pointer');
+                } else if ((mouseX > 975 && mouseX < 1015) && (mouseY > 211 && mouseY < 251)) {
+                    label = 'Planet Zeebo';
+                    cursor('pointer');
+                } else {
+                    cursor('default');
+                }
+                
+                if (label !== '') {
+                    fill(0);
+                    textSize(16);
+                    text(label, mouseX + 15, mouseY - 15);
+                }
+            }
+
+            function mousePressed() {
+                if ((mouseX > 160 && mouseX < 200) && (mouseY > 530 && mouseY < 570)) {
+                    console.log('Jerry clicked');
+                    showJerryOptions = true;
+                } else if ((mouseX > 546 && mouseX < 586) && (mouseY > 579 && mouseY < 619)) {
+                    console.log('Terry clicked');
+                    showTerryOptions = true;
+                } else if ((mouseX > 939 && mouseX < 979) && (mouseY > 660 && mouseY < 700)) {
+                    console.log('Cherry clicked');
+                    showCherryOptions = true;
+                } else if ((mouseX > 975 && mouseX < 1015) && (mouseY > 211 && mouseY < 251)) {
+                    console.log('Planet Zeebo clicked');
+                    showZeeboOptions = true;
+                } else if (showJerryOptions) {
+                    handleJerryOptions();
+                } else if (showTerryOptions) {
+                    handleTerryOptions();
+                } else if (showCherryOptions) {
+                    handleCherryOptions();
+                } else if (showZeeboOptions) {
+                    handleZeeboOptions();
+                }
+                redraw();  // Redraw after any click event
+            }
+
+            function handleJerryOptions() {
+                if ((mouseX > 400 && mouseX < 600) && (mouseY > 600 && mouseY < 640)) {
+                    console.log('Give Jerry lasagna');
+                    score += 500;
+                    showJerryOptions = false;
+                } else if ((mouseX > 400 && mouseX < 600) && (mouseY > 650 && mouseY < 690)) {
+                    console.log('Give Jerry Worms');
+                    score -= 500;
+                    showJerryOptions = false;
+                }
+            }
+
+            function handleTerryOptions() {
+                if ((mouseX > 400 && mouseX < 600) && (mouseY > 600 && mouseY < 640)) {
+                    console.log('Give Terry butter');
+                    score -= 500;
+                    showTerryOptions = false;
+                } else if ((mouseX > 400 && mouseX < 600) && (mouseY > 650 && mouseY < 690)) {
+                    console.log('Give Terry blueberries');
+                    score += 500;
+                    showTerryOptions = false;
+                }
+            }
+
+            function handleCherryOptions() {
+                if ((mouseX > 400 && mouseX < 600) && (mouseY > 600 && mouseY < 640)) {
+                    console.log('Give Cherry cheese');
+                    score -= 500;
+                    showCherryOptions = false;
+                } else if ((mouseX > 400 && mouseX < 600) && (mouseY > 650 && mouseY < 690)) {
+                    console.log('Give Cherry cherries');
+                    score += 500;
+                    showCherryOptions = false;
+                }
+            }
+
+            function handleZeeboOptions() {
+                if ((mouseX > 400 && mouseX < 600) && (mouseY > 600 && mouseY < 640)) {
+                    console.log('Give Planet Zeebo nothing');
+                    showZeeboOptions = false;
+                } else if ((mouseX > 400 && mouseX < 600) && (mouseY > 650 && mouseY < 690)) {
+                    console.log('Give Planet Zeebo a slice of pie anyway');
+                    score += 1500;
+                    showZeeboOptions = false;
+                }
+            }
+
+            function displayJerryOptions() {
+                fill(255, 0, 0);
+                textSize(32);
+                textAlign(CENTER);
+                text('Feed Jerry', width / 2, 550);
+                fill(0, 255, 0);
+                textSize(24);
+                text('Give Jerry lasagna', width / 2, 630);
+                text('Give Jerry Worms', width / 2, 680);
+            }
+
+            function displayTerryOptions() {
+                fill(255, 0, 0);
+                textSize(32);
+                textAlign(CENTER);
+                text('Might I have a bit of food please?', width / 2, 550);
+                fill(0, 255, 0);
+                textSize(24);
+                text('Give Terry butter', width / 2, 630);
+                text('Give Terry blueberries', width / 2, 680);
+            }
+
+            function displayCherryOptions() {
+                fill(255, 0, 0);
+                textSize(32);
+                textAlign(CENTER);
+                text("I'm hungry!", width / 2, 550);
+                fill(0, 255, 0);
+                textSize(24);
+                text('Give Cherry cheese', width / 2, 630);
+                text('Give Cherry cherries', width / 2, 680);
+            }
+
+            function displayZeeboOptions() {
+                fill(255, 0, 0);
+                textSize(32);
+                textAlign(CENTER);
+                text('The Planet Zeebo does not need sustenance', width / 2, 550);
+                fill(0, 255, 0);
+                textSize(24);
+                text('Give Planet Zeebo nothing', width / 2, 630);
+                text('Give Planet Zeebo a slice of pie anyway', width / 2, 680);
+            }
+        </script>
+    </div>
+</body>
+</html>
