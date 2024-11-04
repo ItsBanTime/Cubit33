@@ -32,12 +32,16 @@
             let imgLoadedFlag = false;
 
             function preload() {
-                img = loadImage('Cubit33.jpg', () => {
-                    console.log('Image loaded successfully');
-                    imgLoadedFlag = true;
-                }, () => {
-                    console.error('Failed to load the image. Please make sure the image path is correct.');
-                });
+                img = loadImage('./Cubit33.jpg', imgLoaded, imgFailed);
+            }
+
+            function imgLoaded() {
+                console.log('Image loaded successfully');
+                imgLoadedFlag = true;
+            }
+
+            function imgFailed() {
+                console.error('Failed to load the image. Please make sure the image path is correct.');
             }
 
             function setup() {
@@ -137,7 +141,6 @@
                 } else if (showZeeboOptions) {
                     handleZeeboOptions();
                 }
-                redraw();  // Redraw after any click event
             }
 
             function handleJerryOptions() {
@@ -150,7 +153,6 @@
                     score -= 500;
                     showJerryOptions = false;
                 }
-                redraw();
             }
 
             function handleTerryOptions() {
@@ -163,7 +165,6 @@
                     score += 500;
                     showTerryOptions = false;
                 }
-                redraw();
             }
 
             function handleCherryOptions() {
@@ -176,7 +177,6 @@
                     score += 500;
                     showCherryOptions = false;
                 }
-                redraw();
             }
 
             function handleZeeboOptions() {
@@ -189,7 +189,6 @@
                     score += 1500;
                     showZeeboOptions = false;
                 }
-                redraw();
             }
 
             function displayJerryOptions() {
@@ -213,3 +212,29 @@
                 text('Give Terry butter', width / 2, 630);
                 text('Give Terry blueberries', width / 2, 680);
             }
+
+            function displayCherryOptions() {
+                fill(255, 0, 0);
+                textSize(32);
+                textAlign(CENTER);
+                text("I'm hungry!", width / 2, 550);
+                fill(0, 255, 0);
+                textSize(24);
+                text('Give Cherry cheese', width / 2, 630);
+                text('Give Cherry cherries', width / 2, 680);
+            }
+
+            function displayZeeboOptions() {
+                fill(255, 0, 0);
+                textSize(32);
+                textAlign(CENTER);
+                text('The Planet Zeebo does not need sustenance', width / 2, 550);
+                fill(0, 255, 0);
+                textSize(24);
+                text('Give Planet Zeebo nothing', width / 2, 630);
+                text('Give Planet Zeebo a slice of pie anyway', width / 2, 680);
+            }
+        </script>
+    </div>
+</body>
+</html>
